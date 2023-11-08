@@ -1,0 +1,37 @@
+set_property -dict {PACKAGE_PIN E12 IOSTANDARD LVCMOS18} [get_ports CL_DATA[0]];
+set_property -dict {PACKAGE_PIN D12 IOSTANDARD LVCMOS18} [get_ports CL_DATA[1]];
+set_property -dict {PACKAGE_PIN B11 IOSTANDARD LVCMOS18} [get_ports CL_DATA[2]];
+set_property -dict {PACKAGE_PIN C11 IOSTANDARD LVCMOS18} [get_ports CL_DATA[3]];
+set_property -dict {PACKAGE_PIN A11 IOSTANDARD LVCMOS18} [get_ports CL_DATA[4]];
+set_property -dict {PACKAGE_PIN H13 IOSTANDARD LVCMOS18} [get_ports CL_DATA[5]];
+set_property -dict {PACKAGE_PIN A8  IOSTANDARD LVCMOS18} [get_ports CL_DATA[6]];
+set_property -dict {PACKAGE_PIN B9  IOSTANDARD LVCMOS18} [get_ports CL_DATA[7]];
+set_property -dict {PACKAGE_PIN B10 IOSTANDARD LVCMOS18} [get_ports CL_DATA[8]];
+set_property -dict {PACKAGE_PIN H12 IOSTANDARD LVCMOS18} [get_ports CL_DATA[9]];
+set_property -dict {PACKAGE_PIN A10 IOSTANDARD LVCMOS18} [get_ports CL_DATA[10]];
+set_property -dict {PACKAGE_PIN A7  IOSTANDARD LVCMOS18} [get_ports CL_DATA[11]];
+set_property -dict {PACKAGE_PIN B8  IOSTANDARD LVCMOS18} [get_ports CL_DATA[12]];
+set_property -dict {PACKAGE_PIN C7  IOSTANDARD LVCMOS18} [get_ports CL_DATA[13]];
+set_property -dict {PACKAGE_PIN C6  IOSTANDARD LVCMOS18} [get_ports CL_DATA[14]];
+set_property -dict {PACKAGE_PIN B6  IOSTANDARD LVCMOS18} [get_ports CL_DATA[15]];
+set_property -dict {PACKAGE_PIN K10 IOSTANDARD LVCMOS18} [get_ports CL_DATA[16]];
+set_property -dict {PACKAGE_PIN J10 IOSTANDARD LVCMOS18} [get_ports CL_DATA[17]];
+set_property -dict {PACKAGE_PIN M13 IOSTANDARD LVCMOS18} [get_ports CL_DATA[18]];
+set_property -dict {PACKAGE_PIN L13 IOSTANDARD LVCMOS18} [get_ports CL_DATA[19]];
+set_property -dict {PACKAGE_PIN F7  IOSTANDARD LVCMOS18} [get_ports CL_DATA[20]];
+set_property -dict {PACKAGE_PIN E7  IOSTANDARD LVCMOS18} [get_ports CL_DATA[21]];
+set_property -dict {PACKAGE_PIN E9  IOSTANDARD LVCMOS18} [get_ports CL_DATA[22]];
+set_property -dict {PACKAGE_PIN D9  IOSTANDARD LVCMOS18} [get_ports CL_DATA[23]];
+set_property -dict {PACKAGE_PIN C9  IOSTANDARD LVCMOS18} [get_ports CL_DATA[24]];
+set_property -dict {PACKAGE_PIN C8  IOSTANDARD LVCMOS18} [get_ports CL_DATA[25]];
+set_property -dict {PACKAGE_PIN F8  IOSTANDARD LVCMOS18} [get_ports CL_DATA[26]];
+set_property -dict {PACKAGE_PIN E8  IOSTANDARD LVCMOS18} [get_ports CL_DATA[27]];
+
+set_property -dict {PACKAGE_PIN D11 IOSTANDARD LVCMOS18} [get_ports CL_CLK];
+set_property -dict {PACKAGE_PIN A6  IOSTANDARD LVCMOS18} [get_ports UART_rxd];
+set_property -dict {PACKAGE_PIN D10 IOSTANDARD LVCMOS18} [get_ports UART_txd];
+set_property -dict {PACKAGE_PIN G10 IOSTANDARD LVCMOS18} [get_ports CC1];
+set_property -dict {PACKAGE_PIN F10 IOSTANDARD LVCMOS18} [get_ports CC_EN];
+set_property -dict {PACKAGE_PIN C3  IOSTANDARD LVCMOS33} [get_ports TRIGGER];
+
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets CL_CLK_IBUF_inst/O];
