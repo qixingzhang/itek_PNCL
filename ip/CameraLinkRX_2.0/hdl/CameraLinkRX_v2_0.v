@@ -12,12 +12,14 @@
 		parameter integer C_S00_AXI_ADDR_WIDTH	= 5,
 
 		// Parameters of Axi Master Bus Interface M00_AXIS
-		parameter integer C_M00_AXIS_TDATA_WIDTH	= 32,
+		parameter integer C_M00_AXIS_TDATA_WIDTH	= 64,
 		parameter integer C_M00_AXIS_START_COUNT	= 32
 	)
 	(
 		// Users to add ports here
-        input [27:0] CL_DATA,
+        input [27:0] CL_BASE,
+        input [27:0] CL_MEDIUM,
+        input [27:0] CL_FULL,
         input TRIGGER,
         input PWM,
         output CC1,
@@ -104,7 +106,9 @@
 		.M_AXIS_TLAST(m00_axis_tlast),
 		.M_AXIS_TREADY(m00_axis_tready),
 		.M_AXIS_TUSER(m00_axis_tuser),
-		.CL_DATA(CL_DATA)
+		.CL_BASE(CL_BASE),
+		.CL_MEDIUM(CL_MEDIUM),
+		.CL_FULL(CL_FULL)
 	);
 	
 	// Add user logic here

@@ -8,13 +8,15 @@
 		// Do not modify the parameters beyond this line
 
 		// Width of S_AXIS address bus. The slave accepts the read and write addresses of width C_M_AXIS_TDATA_WIDTH.
-		parameter integer C_M_AXIS_TDATA_WIDTH	= 32,
+		parameter integer C_M_AXIS_TDATA_WIDTH	= 64,
 		// Start count is the number of clock cycles the master will wait before initiating/issuing any transaction.
 		parameter integer C_M_START_COUNT	= 32
 	)
 	(
 		// Users to add ports here
-        input [27:0] CL_DATA,
+        input [27:0] CL_BASE,
+        input [27:0] CL_MEDIUM,
+        input [27:0] CL_FULL,
 //        output reg [31:0] 
 		// User ports ends
 		// Do not modify the ports beyond this line
@@ -39,9 +41,9 @@
 	reg axis_tvalid, axis_tvalid_delay;
 	reg axis_tlast;
     
-    wire cl_valid;
-    wire [7:0] portA, portB, portC;
-    wire [31:0] tx_data;
+    wire base_valid, medium_valid, full_valid, cl_valid;
+    wire [7:0] portA, portB, portC, portD, portE, portF, portG, portH;
+    wire [C_M_AXIS_TDATA_WIDTH-1:0] tx_data;
     reg [C_M_AXIS_TDATA_WIDTH-1:0] axis_tdata, axis_tdata_delay;
     reg axis_tuser, axis_tuser_delay;
 
@@ -53,16 +55,26 @@
 	assign M_AXIS_TSTRB	= {(C_M_AXIS_TDATA_WIDTH/8){1'b1}};
 	assign M_AXIS_TUSER = axis_tuser_delay;
 
-    assign portA = {CL_DATA[5], CL_DATA[27], CL_DATA[6], CL_DATA[4], CL_DATA[3], CL_DATA[2], CL_DATA[1], CL_DATA[0]};
-    assign portB = {CL_DATA[11], CL_DATA[10], CL_DATA[14], CL_DATA[13], CL_DATA[12], CL_DATA[9], CL_DATA[8], CL_DATA[7]};
-    assign portC = {CL_DATA[17], CL_DATA[16], CL_DATA[22], CL_DATA[21], CL_DATA[20], CL_DATA[19], CL_DATA[18], CL_DATA[15]};
-    assign tx_data	= {8'h00, portC, portB, portA};
-    assign cl_valid = CL_DATA[24] & CL_DATA[25] & CL_DATA[26];
+    assign portA = {CL_BASE[5], CL_BASE[27], CL_BASE[6], CL_BASE[4], CL_BASE[3], CL_BASE[2], CL_BASE[1], CL_BASE[0]};
+    assign portB = {CL_BASE[11], CL_BASE[10], CL_BASE[14], CL_BASE[13], CL_BASE[12], CL_BASE[9], CL_BASE[8], CL_BASE[7]};
+    assign portC = {CL_BASE[17], CL_BASE[16], CL_BASE[22], CL_BASE[21], CL_BASE[20], CL_BASE[19], CL_BASE[18], CL_BASE[15]};
+    assign portD = {CL_MEDIUM[5], CL_MEDIUM[27], CL_MEDIUM[6], CL_MEDIUM[4], CL_MEDIUM[3], CL_MEDIUM[2], CL_MEDIUM[1], CL_MEDIUM[0]};
+    assign portE = {CL_MEDIUM[11], CL_MEDIUM[10], CL_MEDIUM[14], CL_MEDIUM[13], CL_MEDIUM[12], CL_MEDIUM[9], CL_MEDIUM[8], CL_MEDIUM[7]};
+    assign portF = {CL_MEDIUM[17], CL_MEDIUM[16], CL_MEDIUM[22], CL_MEDIUM[21], CL_MEDIUM[20], CL_MEDIUM[19], CL_MEDIUM[18], CL_MEDIUM[15]};
+    assign portG = {CL_FULL[5], CL_FULL[27], CL_FULL[6], CL_FULL[4], CL_FULL[3], CL_FULL[2], CL_FULL[1], CL_FULL[0]};
+    assign portH = {CL_FULL[11], CL_FULL[10], CL_FULL[14], CL_FULL[13], CL_FULL[12], CL_FULL[9], CL_FULL[8], CL_FULL[7]};
     
+    assign base_valid = CL_BASE[24] & CL_BASE[25] & CL_BASE[26];
+    assign medium_valid = CL_MEDIUM[24] & CL_MEDIUM[25] & CL_MEDIUM[26];
+    assign full_valid = CL_FULL[24] & CL_FULL[25] & CL_FULL[26];
+    assign cl_valid = base_valid;
+    
+    assign tx_data	= {portH, portG, portF, portE, portD, portC, portB, portA};
+            
     reg cl_valid_delay;
     always@(posedge M_AXIS_ACLK) begin
         if (!M_AXIS_ARESETN) begin
-            axis_tdata <= 32'hffffffff;
+            axis_tdata <= 0;
             axis_tvalid <= 0;
         end
         else begin
@@ -71,7 +83,7 @@
                 axis_tvalid <= 1;
             end
             else begin
-                axis_tdata <= 32'hffffffff;
+                axis_tdata <= 0;
                 axis_tvalid <= 0;
             end
         end
