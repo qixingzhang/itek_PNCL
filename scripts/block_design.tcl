@@ -50,12 +50,12 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 set list_projs [get_projects -quiet]
 if { $list_projs eq "" } {
-   create_project CLRX_vdma vivado_project -part xczu7ev-ffvc1156-2-e
-   set_property BOARD_PART xilinx.com:zcu104:part0:1.1 [current_project]
+   create_project CLRX_vdma vivado_project -part xczu7ev-ffvc1156-2-i
 }
 
 set_property ip_repo_paths ./ip [current_project]
 update_ip_catalog
+add_files ./src/camera_control.v
 
 
 # CHANGE DESIGN NAME HERE
