@@ -1,7 +1,7 @@
 set project_folder "./vivado_project"
 set overlay_name "CLRX_vdma"
 set design_name "CLRX_vdma"
-set board "zcu104"
+set board "z7p"
 
 # open block design
 open_project ${project_folder}/${overlay_name}.xpr
